@@ -1,0 +1,311 @@
+<!DOCTYPE>
+<html>
+
+<head>
+<meta name="description" content="[Visual style example]" />
+<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.1.min.js"></script><meta charset=utf-8 />
+<title>drawing</title>
+  <script src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js"></script>
+  <link href= 'body.css' type="text/css" rel="Stylesheet"/>
+	<script>       
+		//an array store all the drawing information use for people to cancel the step
+		var drawList = new Array();
+		//draw times
+		var drawIndex = -1;
+		
+		//new elements id
+		var node_ele_num=0;
+		var edge_ele_num=0;	
+		
+		$(function(){
+			initCy();
+			var cy = $('#cy').cytoscape('get');		
+
+		});
+		var initCy=function(){
+			$('#cy').cytoscape({
+				style: cytoscape.stylesheet()
+					.selector('node')
+						.css({
+						'content': 'data(name)',
+						'shape':'data(faveShape)',
+						'text-valign': 'center',
+						'color': 'white',
+						'text-outline-width': 2,
+						'text-outline-color': '#888'
+						})
+					.selector('edge')
+						.css({
+						'content': 'data(id)',
+						'target-arrow-shape': 'triangle'
+						})
+					.selector(':selected')
+						.css({
+						'background-color': 'black',
+						'line-color': 'black',
+						'target-arrow-color': 'black',
+						'source-arrow-color': 'black'
+						})
+					.selector('.faded')
+						.css({
+						'opacity': 0.25,
+						'text-opacity': 0
+						}),
+  
+				elements: {
+					nodes: [
+					{ data: { id: 'j', name: 'Jerry' ,faveShape: 'ellipse' }},
+					{ data: { id: 'e', name: 'Elaine', faveShape: 'ellipse'} },
+					{ data: { id: 'k', name: 'Kramer', faveShape: 'ellipse'} },
+					{ data: { id: 'g', name: 'George',faveShape: 'ellipse' } }
+			],
+    edges: [
+      { data: { source: 'j', target: 'e' } },
+      { data: { source: 'j', target: 'k' } },
+      { data: { source: 'j', target: 'g' } },
+      { data: { source: 'e', target: 'j' } },
+      { data: { source: 'e', target: 'k' } },
+      { data: { source: 'k', target: 'j' } },
+      { data: { source: 'k', target: 'e' } },
+      { data: { source: 'k', target: 'g' } },
+      { data: { source: 'g', target: 'j' } }
+    ]
+  },
+  
+  layout: {
+    name: 'grid',
+    padding: 10
+  },
+  
+  ready: function(){
+    window.cy = this;
+    
+    // giddy up...
+    
+	cy.elements().unselectify();
+    
+  }
+});
+		}	
+
+		//show shape selector	
+		var showShape = function(obj){
+			var top = $(obj).offset().top;
+			console.log(top);
+			var left = $(obj).offset().left+42;		
+			document.getElementById("shape").style.left = left + "px";
+			document.getElementById("shape").style.top = top + "px";
+			$(".shape").fadeToggle();
+		}
+		
+var draw_graph = function(graphType,obj){
+	
+	chooseImg(obj);
+
+	function chooseImg(obj){
+		var imgAry  = $("#drawController img");
+		for(var i=0;i<imgAry.length;i++){
+			$(imgAry[i]).removeClass('border_choose');
+			$(imgAry[i]).addClass('border_nochoose');				
+		}
+		$(obj).removeClass("border_nochoose");
+		$(obj).addClass("border_choose");
+	}
+	
+	if(graphType == 'node'){
+		var node_name=prompt("Please enter the name of the node", "@_@");
+		if (node_name != null) {
+			node_ele_num++;
+			var node_ele_id="n"+node_ele_num;
+			cy.add({
+				group: "nodes",
+				data: { id: node_ele_id,name :node_name, faveShape: 'ellipse'},
+				position: { x: 200, y: 200 }
+			});
+			AddstepToArray("n,"+node_ele_id+","+node_name+",ellipse");
+		}
+		$(".shape").fadeOut();
+	}
+	
+	if(graphType == 'tri'){
+		var node_name=prompt("Please enter the name of the node", "@_@");
+		if (node_name != null) {
+			node_ele_num++;
+			var node_ele_id="n"+node_ele_num;
+			cy.add({
+				group: "nodes",
+				data: { id: node_ele_id,name :node_name, faveShape: 'triangle'},
+				position: { x: 100, y: 100 }
+			});
+			AddstepToArray("n,"+node_ele_id+","+node_name+",triangle");
+		}
+		$(".shape").fadeOut();
+	}
+	
+	if(graphType == 'rec'){
+		var node_name=prompt("Please enter the name of the node", "@_@");
+		if (node_name != null) {
+			node_ele_num++;
+			var node_ele_id="n"+node_ele_num;
+			cy.add({
+				group: "nodes",
+				data: { id: node_ele_id,name :node_name, faveShape: 'rectangle'},
+				position: { x: 300, y: 300 }
+			});
+			AddstepToArray("n,"+node_ele_id+","+node_name+",rectangle");
+		}
+		$(".shape").fadeOut();
+	}	
+
+	if(graphType == 'hex'){
+		var node_name=prompt("Please enter the name of the node", "@_@");
+		if (node_name != null) {
+			node_ele_num++;
+			var node_ele_id="n"+node_ele_num;
+			cy.add({
+				group: "nodes",
+				data: { id: node_ele_id,name :node_name, faveShape: 'hexagon'},
+				position: { x: 200, y: 200 }
+			});
+			AddstepToArray("n,"+node_ele_id+","+node_name+",hexagon");
+		}
+		$(".shape").fadeOut();
+	}
+	
+	if(graphType == 'link'){
+	$(".shape").fadeOut();
+	alert("Please choose the source first and then target." );
+		var s;
+		var t;
+		var num_of_s=0;
+		var num_of_t=0;		
+			cy.on('tap', 'node', function(e){
+				
+				var n = e.cyTarget;
+				if(num_of_s==0) {s=n.data('id'); num_of_s++;}
+				else if (num_of_t==0) {t=n.data('id');num_of_t++;}					
+				if(num_of_s==1 && num_of_t==1)
+				{
+				edge_ele_num++;
+				var edge_ele_id="edge"+edge_ele_num;
+					cy.add({
+						group: "edges",
+						data: { id:edge_ele_id, source:s , target:t}
+					});
+					AddstepToArray("e,"+edge_ele_id+","+s+","+t);
+					num_of_s=-1;
+					num_of_t=-1;
+					s="";
+					t="";
+					alert("Successfully draw the line!");
+					no_image_choose();
+				}
+			
+			});
+	}
+
+}
+
+var redraw=function(){
+	window.location.reload()
+}
+
+//cancel the drawing
+var cancel_d=function(){
+	$(".shape").fadeOut();
+	no_image_choose();
+	if(drawIndex>-1){
+	var step=drawList[drawIndex];
+	drawIndex--;
+	var step_split=step.split(",");
+	console.log(step_split[0]+"----index="+drawIndex);
+		var remove_id="#"+step_split[1];	
+		var j=cy.$(remove_id); 
+		cy.remove(j);
+	}
+	else{
+	alert("no more step to be cancle!");
+	}
+}
+
+//recover the drawing
+var next_d=function(){
+	$(".shape").fadeOut();
+	no_image_choose();
+	if(drawIndex>drawList.length-2){
+		alert("no more step can be redo!")
+	}
+	else{
+		drawIndex++;
+		var step=drawList[drawIndex];
+		var step_split=step.split(",");
+		if(step_split[0]=='n'){
+		var r_node_id=step_split[1];
+		var r_node_name=step_split[2];
+		var r_node_shape=step_split[3];
+		cy.add({
+				group: "nodes",
+				data: { id: r_node_id,name :r_node_name,faveShape: r_node_shape },
+				position: { x: 200, y: 200 }
+			});
+		console.log("redo make node :" +step);
+		}
+		if(step_split[0]=='e'){
+		var r_edge_id=step_split[1];
+		var r_edge_s=step_split[2];
+		var r_edge_t=step_split[3];
+				cy.add({
+					group: "edges",
+					data: { id:r_edge_id, source:r_edge_s , target:r_edge_t}
+				});		
+		console.log("redo make edge :" +step);
+		}
+	}
+	
+}
+
+//store the drawing information 
+var AddstepToArray=function(step){
+	while (drawIndex<drawList.length-1){
+		drawList.pop();
+	}
+	drawIndex=drawList.push(step)-1;
+	console.log("drawIndex=" +drawIndex+" arraylen="+drawList.length);
+}
+
+//not drawing something
+var no_image_choose=function(){
+		var imgAry  = $("#drawController img");
+		for(var i=0;i<imgAry.length;i++){
+			$(imgAry[i]).removeClass('border_choose');
+			$(imgAry[i]).addClass('border_nochoose');				
+		}
+}
+</script>	
+</head>
+
+
+<body>
+	<div id="cy"></div>
+	<div id="drawController">
+			<img src = 'image/pencil.png' width = '40px;' height = '40px;' class="img border_nochoose" onclick="showShape(this)" title = 'node'/><br/>
+			<img src = 'image/line.png' width = '40px;' height = '40px;' class="img border_nochoose" onclick="draw_graph('link',this);"  title = 'link'/><br/>
+			<img src = 'image/cancel.png' width = '40px;' height = '40px;' class="img border_nochoose" onclick="cancel_d()" title = 'cancel'/><br/>
+			<img src = 'image/next.png' width = '40px;' height = '40px;' class="img border_nochoose" onclick="next_d()" title = 'next'/><br/>
+			<img src = 'image/xx.png' width = '40px;' height = '40px;' class="img border_nochoose" onclick="redraw()" title = 'clean'/><br/>
+			<img src = 'image/save.png' width = '40px;' height = '40px;' class="img border_nochoose" onclick="save()" title = 'save'/><br/>
+			<a href="#" download="picture.png"  id="downloadImage_a">
+				<img src = 'image/download.png' width = '40px;' height = '40px;' class="img border_nochoose" title = 'download' onclick="downloadImage();"/>
+			</a>
+			<br/>			
+	</div>
+	
+	<div id="shape" class="shape">
+		<img src = 'image/circle.png' width = '38px;' height = '38px;' onclick="draw_graph('node',this)" title = 'node'/>
+		<img src = 'image/tri.png' width = '38px;' height = '38px;' onclick="draw_graph('tri',this)" title = 'node'/>
+		<img src = 'image/rec.png' width = '38px;' height = '38px;' onclick="draw_graph('rec',this)" title = 'node'/>
+		<img src = 'image/hex.png' width = '38px;' height = '38px;' onclick="draw_graph('hex',this)" title = 'node'/>
+	</div>
+	
+</body>
+</html>

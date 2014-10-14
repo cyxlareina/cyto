@@ -1,0 +1,9 @@
+hiiii
+kl;jk
+<entry id="n1" name="" type="gene" link="">
+	<graphics name="@_@" fgcolor="#000000" bgcolor="#ffffff" type="ellipse" x="1019" y="311" width="20" height="20"/>
+</entry>
+<entry id="n1" name="" type="gene" link="">
+	<graphics name="@_@" fgcolor="#000000" bgcolor="#FFFFFF" type="roundrectangle" x="1019" y="311" width="275" height="25"/>
+</entry>
+</pathway>

@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<!DOCTYPE pathway SYSTEM "http://www.kegg.jp/kegg/xml/KGML_v0.7.1_.dtd">
+<pathway>
+<entry id="n1" name="" type="gene" link="">
+	<graphics name="asdkjfh" fgcolor="#000000" bgcolor="#ffffff" type="ellipse" x="1019" y="311" width="20" height="20"/>
+</entry>
+</pathway>

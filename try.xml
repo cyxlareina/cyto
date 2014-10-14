@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE pathway SYSTEM "http://www.kegg.jp/kegg/xml/KGML_v0.7.1_.dtd">
+<!-- Creation date: Feb 21, 2014 15:23:05 +0900 (GMT+09:00) -->
+<pathway name="path:hsa04064" org="hsa" number="04064"
+         title="NF-kappa B signaling pathway"
+         image="http://www.kegg.jp/kegg/pathway/hsa/hsa04064.png"
+         link="http://www.kegg.jp/kegg-bin/show_pathway?hsa04064">
+    <entry id="1" name="path:hsa04060" type="map"
+        link="http://www.kegg.jp/dbget-bin/www_bget?hsa04060">
+        <graphics name="Cytokine-cytokine receptor interaction" fgcolor="#000000" bgcolor="#FFFFFF"
+             type="roundrectangle" x="110" y="597" width="124" height="34"/>
+    </entry>
+    <entry id="2" name="hsa:598" type="gene"
+        link="http://www.kegg.jp/dbget-bin/www_bget?hsa:598">
+        <graphics name="BCL2L1, BCL-XL/S, BCL2L, BCLX, BCLXL, BCLXS, Bcl-X, PPP1R52, bcl-xL, bcl-xS" fgcolor="#000000" bgcolor="#BFFFBF"
+             type="rectangle" x="967" y="311" width="46" height="17"/>
+    </entry>
+    <entry id="3" name="hsa:596" type="gene"
+        link="http://www.kegg.jp/dbget-bin/www_bget?hsa:596">
+        <graphics name="BCL2, Bcl-2, PPP1R50" fgcolor="#000000" bgcolor="#BFFFBF"
+             type="rectangle" x="1019" y="311" width="46" height="17"/>
+    </entry>
+    <entry id="4" name="hsa:329 hsa:330" type="gene"
+        link="http://www.kegg.jp/dbget-bin/www_bget?hsa:329+hsa:330">
+        <graphics name="BIRC2, API1, HIAP2, Hiap-2, MIHB, RNF48, c-IAP1, cIAP1..." fgcolor="#000000" bgcolor="#BFFFBF"
+             type="rectangle" x="967" y="289" width="46" height="17"/>
+    </entry>
+    <entry id="5" name="hsa:4792" type="gene"
+        link="http://www.kegg.jp/dbget-bin/www_bget?hsa:4792">
+        <graphics name="NFKBIA, IKBA, MAD-3, NFKBI" fgcolor="#000000" bgcolor="#BFFFBF"
+             type="rectangle" x="723" y="386" width="46" height="17"/>
+    </entry>
+<entry id="n1" name="" type="gene" link="">
+	<graphics name="asd" fgcolor="#000000" bgcolor="#BFFFBF" type="rectangle" x="1019" y="311" width="46" height="17"/>
+</entry>
+</pathway>
